@@ -1,5 +1,6 @@
 <head>
   <title>Onechat</title>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
 </head>
 <body>
   <div class="container">
@@ -7,6 +8,7 @@
     <div class="navbar-inner">
       <a class="brand" href="/">Onechat</a>
     </div>
+
     {{> world}}
     </header>
   </div>
@@ -14,5 +16,9 @@
 
 
 <template name="world">
-  <div>{{partier_id}}</div>
+  {{partier_id}}</div>
+<canvas id="miniworld" width="150" height="150">
+</canvas>
+
+
 </template>
