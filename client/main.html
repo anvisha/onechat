@@ -15,10 +15,11 @@
 </body>
 
 
+
 <template name="world">
-  {{partier_id}}</div>
-<canvas id="miniworld" width="150" height="150">
-</canvas>
+  {{#each partiers}}
+  <div>{{this}}</div>
+  {{/each}}
 
 
 </template>
