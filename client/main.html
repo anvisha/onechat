@@ -7,6 +7,7 @@
     <div id="main" class="row-fluid">
       YOYOYOYO
     </div>
+    {{> world}}
   </div>
 </body>
 
@@ -14,8 +15,10 @@
 
 <template name="world">
   {{#each partiers}}
-  <div>{{this}}</div>
+  <div>{{this}}
+    <script>alert("hi");</script>
+  </div>
   {{/each}}
-
+  <div>hajsfhk</div>
 
 </template>

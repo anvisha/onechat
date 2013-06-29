@@ -1,15 +1,16 @@
 Template.world.partier_id = function() {
 	return Session.get('partier_id');
-}
+};
 
 Template.world.partiers = function() {
 	var partiers = Partiers.find().fetch();
 	var partier_names = [];
-	for(Object party : partiers){
-		partier_names.push(party.username);
+	for(party in partiers){
+		partier_names.push(party['_id']);
+		console.log(party);
 	}
 	return partier_names;
-}
+};
 
 Meteor.startup(function() {
 	//when client opens
