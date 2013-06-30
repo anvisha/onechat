@@ -1,7 +1,13 @@
+html{
+  height:100%;
+  width:100%;
+}
 body{
-  //background-image:url('/images/bg.png');
+  background-image:url('/images/bg.png');
+  background-size:scale;
   width:100%;
   height:100%;
+  margin:0px;
 }
 
 #miniworld{
@@ -9,7 +15,9 @@ body{
 }
 
 #canvas{
-  background: #CCC;
+  background: none;
   margin: 0;
   padding: 0;
+  width:100%;
+  height:100%;
 }

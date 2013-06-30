@@ -25,49 +25,33 @@ Meteor.startup(function() {
   });
   Session.set("partier_id", partier_id);
 
-  Meteor.setInterval(function(){
-    Partiers.update({_id: partier_id}, {$set{update_time= new Date()}});
+//  Meteor.setInterval(function(){
+//    Partiers.update({_id: partier_id}, {$set{update_time= new Date()}});
+//
+//  }, 20*1000);
 
-  }, 20*1000);
-
-  canvas = void 0;
-  context = void 0;
-  imageObj = void 0;
-  board = void 0;
-  display = void 0;
-  NUM_OF_TILES = 2;
   vX = 0;
   vY = 0;
-  vWidth = 15;
-  vHeight = 10;
+  huh = 32;
+  vWidth = document.width / (2*huh);
+  vHeight = document.height / (2*huh);
   playerX = 0;
   playerY = 0;
-  worldWidth = 29;
-  worldHeight = 19;
+  worldWidth = document.width;
+  worldHeight = document.height;
   $(document).ready(function() {
-    var draw, loadedImagesCount, x, tiles;
-    draw = function() {
+    function draw() {
       var imgNum, theX, theY, x, y;
       context.clearRect(0, 0, canvas.width, canvas.height);
-      y = 0;
-      while (y <= vHeight) {
-        x = 0;
-        while (x <= vWidth) {
-          theX = x * 32;
-          theY = y * 32;
-          imgNum = Math.floor(Math.random() * 3);
-          context.drawImage(tiles[imgNum], theX, theY, 32, 32);
-          x++;
-        }
-        y++;
-      }
       context.fillStyle = "red";
-      return context.fillRect((playerX - vX) * 32, (playerY - vY) * 32, 32, 32);
+      context.fillRect((playerX - vX) * huh, (playerY - vY) * huh, huh, huh);
     };
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
     canvas.tabIndex = 0;
     canvas.focus();
+    canvas.width = document.width;
+    canvas.height= document.height;
     canvas.addEventListener("keydown", (function(e) {
       var key;
       console.log(e);
@@ -109,25 +93,6 @@ Meteor.startup(function() {
       }
       draw();
     }), false);
-    board = [];
-    canvas.width = 512;
-    canvas.height = 352;
-    imageObj = new Image();
-    tiles = [];
-    loadedImagesCount = 0;
-    x = 0;
-    while (x <= NUM_OF_TILES) {
-      imageObj = new Image();
-      imageObj.src = "/images/t" + x + ".png";
-      imageObj.onload = function() {
-        console.log("Added tile ... " + loadedImagesCount);
-        loadedImagesCount++;
-        if (loadedImagesCount === NUM_OF_TILES) {
-          return draw();
-        }
-      };
-      tiles.push(imageObj);
-      x++;
-    }
+    draw();
   });
 });
