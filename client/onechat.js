@@ -10,7 +10,6 @@ Template.world.partiers = function() {
   for (_i = 0, _len = partiers.length; _i < _len; _i++) {
     party = partiers[_i];
     partier_names.push(party._id);
-    console.log(party._id);
   }
   return partier_names;
 };
@@ -21,15 +20,16 @@ Meteor.startup(function() {
     username: null,
     x: null,
     y: null,
-    video_stream: null
+    video_stream: null,
+    update_time: null
   });
   Session.set("partier_id", partier_id);
-  partiers = Partiers.find().fetch();
-  Meteor.setInterval(function() {
-    if (Meteor.status().connected) {
-      return Meteor.call('keepalive', Session.get('partier_id'));
-    }
-  }, 20 * 1000);
+
+  Meteor.setInterval(function(){
+    Partiers.update({_id: partier_id}, {$set{update_time= new Date()}});
+
+  }, 20*1000);
+
   canvas = void 0;
   context = void 0;
   imageObj = void 0;
