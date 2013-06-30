@@ -16,7 +16,7 @@ Template.world.partiers = function() {
 };
 
 Meteor.startup(function() {
-  var NUM_OF_TILES, board, canvas, context, display, imageObj, partier_id, partiers, playerX, playerY, tiles, vHeight, vWidth, vX, vY, worldHeight, worldWidth;
+  var NUM_OF_TILES, board, canvas, context, display, imageObj, partier_id, partiers, playerX, playerY, vHeight, vWidth, vX, vY, worldHeight, worldWidth;
   partier_id = Partiers.insert({
     username: null,
     x: null,
@@ -33,7 +33,6 @@ Meteor.startup(function() {
   canvas = void 0;
   context = void 0;
   imageObj = void 0;
-  tiles = void 0;
   board = void 0;
   display = void 0;
   NUM_OF_TILES = 2;
@@ -45,8 +44,8 @@ Meteor.startup(function() {
   playerY = 0;
   worldWidth = 29;
   worldHeight = 19;
-  return $(document).ready(function() {
-    var draw, loadedImagesCount, x, _results;
+  $(document).ready(function() {
+    var draw, loadedImagesCount, x, tiles;
     draw = function() {
       var imgNum, theX, theY, x, y;
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -108,7 +107,7 @@ Meteor.startup(function() {
       if (vY + vHeight > worldHeight) {
         vY = worldHeight - vHeight;
       }
-      return draw();
+      draw();
     }), false);
     board = [];
     canvas.width = 512;
@@ -117,7 +116,6 @@ Meteor.startup(function() {
     tiles = [];
     loadedImagesCount = 0;
     x = 0;
-    _results = [];
     while (x <= NUM_OF_TILES) {
       imageObj = new Image();
       imageObj.src = "/images/t" + x + ".png";
@@ -129,8 +127,7 @@ Meteor.startup(function() {
         }
       };
       tiles.push(imageObj);
-      _results.push(x++);
+      x++;
     }
-    return _results;
   });
 });
