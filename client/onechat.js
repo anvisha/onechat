@@ -25,10 +25,10 @@ Meteor.startup(function() {
   });
   Session.set("partier_id", partier_id);
 
-//  Meteor.setInterval(function(){
-//    Partiers.update({_id: partier_id}, {$set{update_time= new Date()}});
-//
-//  }, 20*1000);
+  var now = new Date();
+
+  Meteor.setInterval(function(){
+    Partiers.update({_id: partier_id}, {$set: {update_time: new Date()}});
 
   vX = 0;
   vY = 0;
