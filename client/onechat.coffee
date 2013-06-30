@@ -5,7 +5,8 @@ Template.world.partiers = ->
   partiers = Partiers.find().fetch()
   partier_names = []
   for party of partiers
-    partier_names.push party.username
+    partier_names.push party["_id"]
+    console.log party
   partier_names
 
 Meteor.startup ->
